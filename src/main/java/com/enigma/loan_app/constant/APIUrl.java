@@ -4,4 +4,5 @@ public class APIUrl {
     public static final String CUSTOMER_API = "/api/v1/customers";
     public static final String AUTH_API = "/api/v1/auth";
     public static final String USER_API = "/api/v1/users";
+    public static final String INSTALMENT_API = "/api/v1/instalment_api";
 }
