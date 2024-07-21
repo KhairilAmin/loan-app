@@ -6,6 +6,7 @@ import com.enigma.loan_app.dto.response.CommonResponse;
 import com.enigma.loan_app.dto.response.LoanTypeResponse;
 import com.enigma.loan_app.entity.LoanType;
 import com.enigma.loan_app.service.LoanTypeService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(APIUrl.LOANTYPE_API)
+@SecurityRequirement(name = "Authorization")
 public class LoanTypeController {
     private final LoanTypeService loanTypeService;
 

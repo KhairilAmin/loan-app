@@ -1,0 +1,777 @@
+{
+	"info": {
+		"_postman_id": "0831b8ad-709f-4dbd-b586-5c56297a0407",
+		"name": "Loan App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32364598"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "RegisterCustomer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"khairil4@gmail.com\",\n    \"password\" : \"12345678\",\n    \"data\" : {\n        \"firstName\" : \"Khairil4\",\n        \"lastName\" : \"Amin\",\n        \"dateOfBirth\": \"2021-01-02\",\n        \"phone\" : \"081929595109\",\n        \"status\" : \"belum tau untuk apa\"        \n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/signup/customer",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RegisterStaffandAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"admin@gmail.com\",\n    \"password\" : \"12345678\",\n    \"data\" : {\n        \"role\" : \"ROLE_ADMIN\"       \n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"admin@gmail.com\",\n    \"password\" : \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GetUsersById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/users/0216f7d9-5801-4651-b01b-fabafb79a32c",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"0216f7d9-5801-4651-b01b-fabafb79a32c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/customers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCustomerById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/customers/e1aad545-5a81-4c1f-bad0-a7e8b091298e",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"e1aad545-5a81-4c1f-bad0-a7e8b091298e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCustomer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\" : \"ffe16cc2-190d-4a50-8ae3-f3ebfd2ce652\",\n    \"firstName\" : \"Khairil Update\",\n    \"lastName\" : \"Amin\",\n    \"dateOfBirth\": \"2021-01-02\",\n    \"phone\" : \"081929598109\",\n    \"status\" : \"1\"\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/customers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UploadImage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/enigma/Downloads/112c6915-19e4-40de-a701-4acf14ea6982.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/customers/ffe16cc2-190d-4a50-8ae3-f3ebfd2ce652/upload/avatar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"ffe16cc2-190d-4a50-8ae3-f3ebfd2ce652",
+								"upload",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SoftDeleteCustomer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/customers/ffe16cc2-190d-4a50-8ae3-f3ebfd2ce652",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"ffe16cc2-190d-4a50-8ae3-f3ebfd2ce652"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "InstallmentType",
+			"item": [
+				{
+					"name": "CreateInstallmentType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb2FuX2FwcCIsInN1YiI6ImY3MWNlMjI4LWVhNDEtNGE0OS1iNWMzLTQzYTkyN2ZlODM5NSIsImV4cCI6MTcyMTU1ODc4OSwiaWF0IjoxNzIxNTU1MTg5LCJyb2xlIjoiUk9MRV9TVEFGRiJ9.tOq9SiiP4a_y9jRAh_P1EBlyqudaEBRK4tUgYWAdruI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"instalment type\" : \"THREE_MONTHS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/instalment-types",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"instalment-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllinstallmentType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb2FuX2FwcCIsInN1YiI6ImY3MWNlMjI4LWVhNDEtNGE0OS1iNWMzLTQzYTkyN2ZlODM5NSIsImV4cCI6MTcyMTU3NjgzOSwiaWF0IjoxNzIxNTczMjM5LCJyb2xlIjoiUk9MRV9TVEFGRiJ9.veQF9CPBl4Hxinzg__x0iLAB6bUYiBKrvP3ZdlpLVVU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/instalment-types",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"instalment-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb2FuX2FwcCIsInN1YiI6ImY3MWNlMjI4LWVhNDEtNGE0OS1iNWMzLTQzYTkyN2ZlODM5NSIsImV4cCI6MTcyMTU1ODc4OSwiaWF0IjoxNzIxNTU1MTg5LCJyb2xlIjoiUk9MRV9TVEFGRiJ9.tOq9SiiP4a_y9jRAh_P1EBlyqudaEBRK4tUgYWAdruI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/instalment-types/ca7055aa-b438-472a-b58c-c6593d28008d",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"instalment-types",
+								"ca7055aa-b438-472a-b58c-c6593d28008d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateInstalmentType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb2FuX2FwcCIsInN1YiI6IjY5MDcyODcwLTJhOGUtNDM4NS1iN2JjLWVkODQ4ZDlkNjg4OSIsImV4cCI6MTcyMTU1NzQ4MSwiaWF0IjoxNzIxNTUzODgxLCJyb2xlIjoiUk9MRV9TVEFGRiJ9.Is4-VCM4i7W7vZfRc2pukh6eODaDWC-xQNTxj9cy0xo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"72cb9c01-15f1-46b1-83b7-9d33df1eb54a\",\n    \"instalment type\": \"TWELVE_MONTHS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/instalment-types",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"instalment-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteInstallmentType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb2FuX2FwcCIsInN1YiI6ImY3MWNlMjI4LWVhNDEtNGE0OS1iNWMzLTQzYTkyN2ZlODM5NSIsImV4cCI6MTcyMTU1ODc4OSwiaWF0IjoxNzIxNTU1MTg5LCJyb2xlIjoiUk9MRV9TVEFGRiJ9.tOq9SiiP4a_y9jRAh_P1EBlyqudaEBRK4tUgYWAdruI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/instalment-types/ca7055aa-b438-472a-b58c-c6593d28008d",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"instalment-types",
+								"ca7055aa-b438-472a-b58c-c6593d28008d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LoanType",
+			"item": [
+				{
+					"name": "GetAllLoanType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb2FuX2FwcCIsInN1YiI6ImY3MWNlMjI4LWVhNDEtNGE0OS1iNWMzLTQzYTkyN2ZlODM5NSIsImV4cCI6MTcyMTU3NjgzOSwiaWF0IjoxNzIxNTczMjM5LCJyb2xlIjoiUk9MRV9TVEFGRiJ9.veQF9CPBl4Hxinzg__x0iLAB6bUYiBKrvP3ZdlpLVVU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/loan-types",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"loan-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateLoanType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb2FuX2FwcCIsInN1YiI6ImY3MWNlMjI4LWVhNDEtNGE0OS1iNWMzLTQzYTkyN2ZlODM5NSIsImV4cCI6MTcyMTU3MTU0MSwiaWF0IjoxNzIxNTY3OTQxLCJyb2xlIjoiUk9MRV9TVEFGRiJ9.j-HNqAIS2KtlHrkaPP6yOOVXlniEIc18NtlLK5zyGdk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"Pinjaman Kebutuhan Harian\",\n  \"maxLoan\": 100000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/loan-types",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"loan-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLoanTypeById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb2FuX2FwcCIsInN1YiI6ImY3MWNlMjI4LWVhNDEtNGE0OS1iNWMzLTQzYTkyN2ZlODM5NSIsImV4cCI6MTcyMTU3MTU0MSwiaWF0IjoxNzIxNTY3OTQxLCJyb2xlIjoiUk9MRV9TVEFGRiJ9.j-HNqAIS2KtlHrkaPP6yOOVXlniEIc18NtlLK5zyGdk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/loan-types/9c4252bd-4c19-43ae-82d8-f71b40bf55f6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"loan-types",
+								"9c4252bd-4c19-43ae-82d8-f71b40bf55f6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateLoanTypes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb2FuX2FwcCIsInN1YiI6ImY3MWNlMjI4LWVhNDEtNGE0OS1iNWMzLTQzYTkyN2ZlODM5NSIsImV4cCI6MTcyMTU3MTU0MSwiaWF0IjoxNzIxNTY3OTQxLCJyb2xlIjoiUk9MRV9TVEFGRiJ9.j-HNqAIS2KtlHrkaPP6yOOVXlniEIc18NtlLK5zyGdk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"9c4252bd-4c19-43ae-82d8-f71b40bf55f6\",\n    \"type\": \"Pinjaman Kebutuhan Harian Update\",\n    \"maxLoan\": 100000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/loan-types",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"loan-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteLoanType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb2FuX2FwcCIsInN1YiI6ImY3MWNlMjI4LWVhNDEtNGE0OS1iNWMzLTQzYTkyN2ZlODM5NSIsImV4cCI6MTcyMTU3MTU0MSwiaWF0IjoxNzIxNTY3OTQxLCJyb2xlIjoiUk9MRV9TVEFGRiJ9.j-HNqAIS2KtlHrkaPP6yOOVXlniEIc18NtlLK5zyGdk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/loan-types/9c4252bd-4c19-43ae-82d8-f71b40bf55f6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"loan-types",
+								"9c4252bd-4c19-43ae-82d8-f71b40bf55f6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "CreateLoanRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb2FuX2FwcCIsInN1YiI6ImE5OGNiZWU3LTk5ZWEtNDMwOC1iYzUxLTQ1Y2VkNDllYzMyZSIsImV4cCI6MTcyMTU5MjUzOCwiaWF0IjoxNzIxNTg4OTM4LCJyb2xlIjoiUk9MRV9DVVNUT01FUiJ9.1LJjzgUD_SrV5I9Xbf3kt-vWW2Tmzrzrkg4vgKAQuf8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"loanType\": {\n    \"id\": \"2d4d068a-682c-4a38-bfd5-2e5707fd833f\"\n  },\n  \"instalmentType\": {\n    \"id\": \"decd275c-29dc-4ef0-9017-89809dcbb9a0\"\n  },\n  \"customer\": {\n    \"id\": \"e1aad545-5a81-4c1f-bad0-a7e8b091298e\"\n  },\n  \"nominal\": 100000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/transactions",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ApproveLoan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb2FuX2FwcCIsInN1YiI6IjFkNDA4YWUxLWRmYmItNDQxYi05NzhiLWNjNGYyMjVkNjBiNyIsImV4cCI6MTcyMTU5MTA4OSwiaWF0IjoxNzIxNTg3NDg5LCJyb2xlIjoiUk9MRV9BRE1JTiJ9.qUq-Mpo3i1ozmKEdyysyM53aSOeFT6HfcsDKC98B9Q8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"loanTransactionId\" : \"2bcb9195-a624-43e1-b045-81f342482c1f\",\n    \"interestRates\" : 9\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/transactions/1d408ae1-dfbb-441b-978b-cc4f225d60b7/approve",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"1d408ae1-dfbb-441b-978b-cc4f225d60b7",
+								"approve"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLoanById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/transactions/2bcb9195-a624-43e1-b045-81f342482c1f",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"2bcb9195-a624-43e1-b045-81f342482c1f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pay",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsb2FuX2FwcCIsInN1YiI6IjFkNDA4YWUxLWRmYmItNDQxYi05NzhiLWNjNGYyMjVkNjBiNyIsImV4cCI6MTcyMTU5NDk5MSwiaWF0IjoxNzIxNTkxMzkxLCJyb2xlIjoiUk9MRV9BRE1JTiJ9.uyBHL6TD_FnqWJu1ZEhQpklW1x_ZZTfpdU2hnVaCIyc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/enigma/Downloads/e309ace8-1fc3-40c4-a390-3316feb9f0fe.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/transactions/7130a6af-efe9-4860-afa0-d5f432d681d5/pay",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"7130a6af-efe9-4860-afa0-d5f432d681d5",
+								"pay"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

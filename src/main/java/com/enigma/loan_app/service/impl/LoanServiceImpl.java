@@ -1,9 +1,11 @@
 package com.enigma.loan_app.service.impl;
 
+import com.enigma.loan_app.constant.APIUrl;
 import com.enigma.loan_app.dto.request.ApproveLoanRequest;
 import com.enigma.loan_app.dto.request.LoanRequest;
 import com.enigma.loan_app.dto.response.LoanResponse;
 import com.enigma.loan_app.dto.response.LoanTransactionDetailResponse;
+import com.enigma.loan_app.dto.response.PaymentResponse;
 import com.enigma.loan_app.entity.*;
 import com.enigma.loan_app.repository.*;
 import com.enigma.loan_app.service.CustomerService;
@@ -13,11 +15,17 @@ import com.enigma.loan_app.utils.NoSuchDataExistsException;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -31,6 +39,8 @@ public class LoanServiceImpl implements LoanService {
     private final InstalmentTypeImpl instalmentTypeService;
     private final UserServiceImpl userService;
     private final LoanDetailRepository loanDetailRepository;
+    private Path targetDirectory;
+    private final PaymentPictureRepository paymentPictureRepository;
     @Override
     public LoanResponse createLoan(LoanRequest loanRequest) {
         Customer customer = customerService.findByidOrThrowNotFound(loanRequest.getCustomer().getId());
@@ -124,6 +134,46 @@ public class LoanServiceImpl implements LoanService {
 
 
         return loanResponse;
+    }
+
+    @Override
+    public PaymentResponse paymentPicture(MultipartFile file, String id) {
+        this.targetDirectory = Path.of("assets/images/");
+        try {
+            Files.createDirectories(targetDirectory);
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
+        String fileName = Objects.requireNonNull(file.getOriginalFilename());
+        String idFileName = id + "_" + fileName;
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(APIUrl.TRANSACTION_API)
+                .path("/payment-picture/")
+                .path(idFileName)
+                .toUriString();
+        LoanTransactionDetail loanTransactionDetail = loanDetailRepository.findById(id).orElse(null);
+        if (loanTransactionDetail == null) {
+            throw new NoSuchDataExistsException("loanTransactionDetail not found or status is inactive");
+        }
+        loanTransactionDetail.setLoanStatus(LoanTransactionDetail.LoanStatus.PAID);
+        loanTransactionDetail.setUpdatedAt(new Date());
+        loanDetailRepository.saveAndFlush(loanTransactionDetail);
+
+        PaymentPIcture paymentPIcture = new PaymentPIcture();
+        paymentPIcture.setContentType(file.getContentType());
+        paymentPIcture.setSize(file.getSize());
+        paymentPIcture.setUrl(fileDownloadUri);
+        paymentPIcture.setName(idFileName);
+        paymentPIcture.setLoanTransactionDetail(loanTransactionDetail);
+
+        paymentPictureRepository.saveAndFlush(paymentPIcture);
+
+        PaymentResponse paymentResponse = PaymentResponse.builder()
+                .loanTransactionDetail(convertToTranactionDetailsResponse(loanTransactionDetail))
+                .name(paymentPIcture.getName())
+                .url(paymentPIcture.getUrl())
+                .build();
+        return paymentResponse;
     }
 
     private LoanTransaction createLoanTransactionDetail(LoanTransaction loanTransaction,int iteraton,int interestRate,String adminId) {

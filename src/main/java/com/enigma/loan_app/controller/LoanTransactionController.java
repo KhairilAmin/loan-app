@@ -5,18 +5,23 @@ import com.enigma.loan_app.dto.request.ApproveLoanRequest;
 import com.enigma.loan_app.dto.request.LoanRequest;
 import com.enigma.loan_app.dto.response.CommonResponse;
 import com.enigma.loan_app.dto.response.LoanResponse;
+import com.enigma.loan_app.dto.response.PaymentResponse;
+import com.enigma.loan_app.dto.response.ProfilePictureResponse;
 import com.enigma.loan_app.service.LoanService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(APIUrl.TRANSACTION_API)
+@SecurityRequirement(name = "Authorization")
 public class LoanTransactionController {
     private final LoanService loanService;
 
@@ -48,5 +53,16 @@ public class LoanTransactionController {
                 .data(Optional.of(loanResponse))
                 .build();
         return ResponseEntity.status(HttpStatus.CREATED).body(commonResponse);
+    }
+
+    @PostMapping("/{id}/pay")
+    public ResponseEntity<CommonResponse<PaymentResponse>> uploadAvatar(@PathVariable String id, @RequestParam("file") MultipartFile file) {
+        PaymentResponse paymentResponse = loanService.paymentPicture(file,id);
+
+        CommonResponse<PaymentResponse> commonResponse = CommonResponse.<PaymentResponse>builder()
+                .message("Payment Successful!")
+                .data(Optional.of(paymentResponse))
+                .build();
+        return ResponseEntity.status(HttpStatus.OK).body(commonResponse);
     }
 }

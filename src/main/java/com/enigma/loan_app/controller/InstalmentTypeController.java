@@ -6,6 +6,7 @@ import com.enigma.loan_app.dto.response.CommonResponse;
 import com.enigma.loan_app.dto.response.CustomerResponse;
 import com.enigma.loan_app.dto.response.InstalmentTypeResponse;
 import com.enigma.loan_app.service.InstalmentTypeService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(APIUrl.INSTALMENT_API)
+@SecurityRequirement(name = "Authorization")
 public class InstalmentTypeController {
     private final InstalmentTypeService instalmentTypeService;
 
