@@ -3,8 +3,7 @@ package com.enigma.loan_app.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

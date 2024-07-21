@@ -1,7 +1,8 @@
 package com.enigma.loan_app.dto.request;
 
+import com.enigma.loan_app.entity.Customer;
 import com.enigma.loan_app.entity.InstalmentType;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.enigma.loan_app.entity.LoanType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,8 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class InstalmentTypeRequest {
-    private String id;
-    @JsonProperty("instalment type")
-    private InstalmentType.EInstalmentType instalmentType;
+public class LoanRequest {
+    private LoanType loanType;
+    private InstalmentType instalmentType;
+    private Customer customer;
+    private Double nominal;
 }

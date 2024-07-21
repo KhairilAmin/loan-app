@@ -26,6 +26,8 @@ public class Customer {
     private String phone;
     @Column(name = "status")
     private String status;
+    @Column(name = "deleted")
+    private boolean deleted = false;
 
     @OneToOne
     @JoinColumn(name = "user_id")

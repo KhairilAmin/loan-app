@@ -15,4 +15,5 @@ public interface CustomerService {
     CustomerResponse updateCustomer(CustomerRequest request);
     ProfilePictureResponse UploadProfileAvatar(MultipartFile file, String id);
     Resource getFile(String name);
+    String deleteCustomer(String id);
 }

@@ -12,7 +12,7 @@ import java.util.Date;
 @Entity
 @Builder
 @Table(name = "trx_loan_detail")
-class LoanTransactionDetail {
+public class LoanTransactionDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -21,11 +21,11 @@ class LoanTransactionDetail {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trx_loan_id", nullable = false)
     private LoanTransaction loanTransaction;
-    private LoanStatus loanStatus; // enum
+    private LoanStatus loanStatus = LoanStatus.UNPAID; // enum
     private Date createdAt;
     private Date updatedAt;
 
-    enum LoanStatus {
+    public enum LoanStatus {
         PAID,
         UNPAID
     }

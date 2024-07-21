@@ -11,4 +11,6 @@ public interface InstalmentTypeService {
     InstalmentTypeResponse createInstalmentType(InstalmentTypeRequest request);
     List<InstalmentTypeResponse> getAllInstalmentType();
     InstalmentTypeResponse getByIdInstalmentType(String id);
+    InstalmentTypeResponse updateInstalmentType(InstalmentTypeRequest request);
+    String deleteInstalmentType(String id);
 }

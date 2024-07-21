@@ -85,4 +85,11 @@ public class CustomerController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CommonResponse> deleteCustomer(@PathVariable String id) {
+        String response = customerService.deleteCustomer(id);
+        CommonResponse commonResponse = CommonResponse.builder().message(response).build();
+        return ResponseEntity.status(HttpStatus.OK).body(commonResponse);
+    }
 }

@@ -9,6 +9,7 @@ import com.enigma.loan_app.entity.ProfilePicture;
 import com.enigma.loan_app.repository.CustomerRepository;
 import com.enigma.loan_app.repository.ProfilePictureRepository;
 import com.enigma.loan_app.service.CustomerService;
+import com.enigma.loan_app.utils.NoSuchDataExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -50,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerResponse> getAllCustomers() {
-        List<CustomerResponse> customers = customerRepository.findAll().stream().map(this::convertToCustomerResponse).toList();
+        List<CustomerResponse> customers = customerRepository.findAllByDeletedFalse().stream().map(this::convertToCustomerResponse).toList();
         return customers;
     }
 
@@ -62,6 +63,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerResponse updateCustomer(CustomerRequest request) {
+        findByidOrThrowNotFound(request.getId());
+
         Customer customer = findByidOrThrowNotFound(request.getId());
         customer.setFirstName(request.getFirstName());
         customer.setLastName(request.getLastName());
@@ -129,9 +132,28 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
+    @Override
+    public String deleteCustomer(String id) {
+        System.out.println(1);
+        findByidOrThrowNotFound(id);
+        System.out.println(2);
+        customerRepository.findById(id).ifPresent(customer -> {
+            customer.setDeleted(true);
+            customerRepository.save(customer);
+        });
+        return "Deleted Customer with id: " + id;
+    }
 
-    private Customer findByidOrThrowNotFound (String id) {
-        return customerRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Customer not found"));
+
+    public Customer findByidOrThrowNotFound(String id) {
+        Customer customer = customerRepository.findById(id)
+                .orElse(null);
+
+        if (customer == null || customer.isDeleted()) {
+            throw new NoSuchDataExistsException("Customer not found or status is inactive");
+        }
+
+        return customer;
     }
 
     private CustomerResponse convertToCustomerResponse(Customer customer) {

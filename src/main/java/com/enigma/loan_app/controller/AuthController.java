@@ -4,6 +4,7 @@ import com.enigma.loan_app.constant.APIUrl;
 import com.enigma.loan_app.dto.request.AuthRequest;
 import com.enigma.loan_app.dto.request.CustomerRequest;
 import com.enigma.loan_app.dto.response.CommonResponse;
+import com.enigma.loan_app.dto.response.LoginResponse;
 import com.enigma.loan_app.dto.response.RegisterResponse;
 import com.enigma.loan_app.entity.Role;
 import com.enigma.loan_app.service.AuthService;
@@ -46,5 +47,17 @@ public class AuthController {
                 .build();
 
         return ResponseEntity.status(HttpStatus.CREATED).body(accountRegistered);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<CommonResponse<LoginResponse>> login(@RequestBody AuthRequest<String> request){
+        LoginResponse response = authService.login(request);
+        CommonResponse<LoginResponse> commonResponse = CommonResponse.<LoginResponse>builder()
+                .message("Success Login")
+                .data(Optional.empty())
+                .data(Optional.of(response))
+                .build();
+        return ResponseEntity.ok(commonResponse);
+
     }
 }

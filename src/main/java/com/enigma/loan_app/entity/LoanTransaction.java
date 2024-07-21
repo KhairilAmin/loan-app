@@ -35,7 +35,7 @@ public class LoanTransaction {
     private Date createdAt;
     private Date updatedAt;
 
-    enum ApprovalStatus {
+    public enum ApprovalStatus {
         APPROVED,
         REJECTED
     }
